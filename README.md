@@ -63,3 +63,63 @@ Output:Original Array:
 
 Sorted Array:
 3 9 10 27 38 43 82
+
+2.Quick Sort
+public class QuickSort {
+
+    // Function to partition the array
+    public static int partition(int arr[], int low, int high) {
+        int pivot = arr[high]; 
+        int i = (low - 1);    
+
+        for (int j = low; j < high; j++) {
+
+            if (arr[j] < pivot) {
+                i++;
+
+                // swap arr[i] and arr[j]
+                int temp = arr[i];
+                arr[i] = arr[j];
+                arr[j] = temp;
+            }
+        }
+
+        // swap arr[i+1] and arr[high] (pivot)
+        int temp = arr[i + 1];
+        arr[i + 1] = arr[high];
+        arr[high] = temp;
+
+        return i + 1;
+    }
+
+    // Recursive quicksort
+    public static void quickSort(int arr[], int low, int high) {
+        if (low < high) {
+            int pi = partition(arr, low, high);
+
+            quickSort(arr, low, pi - 1);
+            quickSort(arr, pi + 1, high);
+        }
+    }
+
+    public static void main(String[] args) {
+        int arr[] = { 10, 7, 8, 9, 1, 5 };
+
+        System.out.println("Original Array: ");
+        for (int x : arr)
+            System.out.print(x + " ");
+
+        quickSort(arr, 0, arr.length - 1);
+
+        System.out.println("\n\nSorted Array: ");
+        for (int x : arr)
+            System.out.print(x + " ");
+    }
+}
+Output:
+Original Array: 
+10 7 8 9 1 5 
+
+Sorted Array: 
+1 5 7 8 9 10
+
