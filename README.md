@@ -122,16 +122,15 @@ Original Array:
 
 Sorted Array: 
 1 5 7 8 9 10
-3.0/1 Knapsack problem using Dynamic programming
-#include <stdio.h>
 
+
+3. 0/1 Knapsack problem using Dynamic programming
+#include <stdio.h>
 int max(int a, int b) {
     return (a > b) ? a : b;
 }
-
 int knapsack(int W, int wt[], int val[], int n) {
     int dp[n + 1][W + 1];
-
     for (int i = 0; i <= n; i++) {
         for (int w = 0; w <= W; w++) {
             if (i == 0 || w == 0)
@@ -157,7 +156,9 @@ int main() {
 }
 Output:
 Maximum Profit = 220
-4.0/1 Knapsack problem by using Greedy method
+
+
+4.  0/1 Knapsack problem by using Greedy method
 #include <stdio.h>
 
 struct Item {
@@ -165,7 +166,6 @@ struct Item {
     int profit;
     float ratio;
 };
-
 int main() {
     int capacity = 50;
     int n = 3;
