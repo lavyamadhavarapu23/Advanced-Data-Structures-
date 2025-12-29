@@ -157,4 +157,55 @@ int main() {
 }
 Output:
 Maximum Profit = 220
+4.0/1 Knapsack problem by using Greedy method
+#include <stdio.h>
+
+struct Item {
+    int weight;
+    int profit;
+    float ratio;
+};
+
+int main() {
+    int capacity = 50;
+    int n = 3;
+
+    struct Item items[3] = {
+        {10, 60, 0},
+        {20, 100, 0},
+        {30, 120, 0}
+    };
+
+    // Calculate profit/weight ratio
+    for (int i = 0; i < n; i++) {
+        items[i].ratio = (float)items[i].profit / items[i].weight;
+    }
+
+    // Sort items by ratio (descending) - Bubble Sort
+    for (int i = 0; i < n - 1; i++) {
+        for (int j = 0; j < n - i - 1; j++) {
+            if (items[j].ratio < items[j + 1].ratio) {
+                struct Item temp = items[j];
+                items[j] = items[j + 1];
+                items[j + 1] = temp;
+            }
+        }
+    }
+
+    int totalWeight = 0, totalProfit = 0;
+
+    // Greedy selection
+    for (int i = 0; i < n; i++) {
+        if (totalWeight + items[i].weight <= capacity) {
+            totalWeight += items[i].weight;
+            totalProfit += items[i].profit;
+        }
+    }
+
+    printf("Total Profit (Greedy 0/1 Knapsack): %d\n", totalProfit);
+
+    return 0;
+}
+Output:
+Total Profit (Greedy 0/1 Knapsack): 160
 
