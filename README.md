@@ -913,3 +913,81 @@ int main() {
 
     return 0;
 }
+HEIGHT CALCULATION IN AVL TREE
+#include <stdio.h>
+#include <stdlib.h>
+
+struct Node {
+    int key;
+    struct Node *left;
+    struct Node *right;
+    int height;
+};
+
+/* Function to find maximum */
+int max(int a, int b) {
+    if(a > b)
+        return a;
+    else
+        return b;
+}
+
+/* Height calculation */
+int height(struct Node *node) {
+    if(node == NULL)
+        return 0;
+    return node->height;
+}
+
+/* Create new node */
+struct Node* createNode(int key) {
+    struct Node* node = (struct Node*)malloc(sizeof(struct Node));
+    node->key = key;
+    node->left = NULL;
+    node->right = NULL;
+    node->height = 1;
+    return node;
+}
+
+/* Insert node */
+struct Node* insert(struct Node* node, int key) {
+
+    if(node == NULL)
+        return createNode(key);
+
+    if(key < node->key)
+        node->left = insert(node->left, key);
+    else if(key > node->key)
+        node->right = insert(node->right, key);
+
+    /* Update height */
+    node->height = 1 + max(height(node->left), height(node->right));
+
+    return node;
+}
+
+/* Inorder traversal */
+void inorder(struct Node* root) {
+    if(root != NULL) {
+        inorder(root->left);
+        printf("%d ", root->key);
+        inorder(root->right);
+    }
+}
+
+int main() {
+
+    struct Node* root = NULL;
+
+    root = insert(root, 30);
+    root = insert(root, 20);
+    root = insert(root, 40);
+    root = insert(root, 10);
+
+    printf("Inorder Traversal:\n");
+    inorder(root);
+
+    printf("\nHeight of root node: %d", height(root));
+
+    return 0;
+}
