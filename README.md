@@ -1125,3 +1125,37 @@ int main(){
 
     return 0;
 }
+DEPTH FIRST SEARCH
+#include <stdio.h>
+
+int visited[20];
+
+void dfs(int graph[20][20], int n, int v){
+    printf("%d ",v);
+    visited[v] = 1;
+
+    for(int i=0;i<n;i++){
+        if(graph[v][i] && !visited[i]){
+            dfs(graph,n,i);
+        }
+    }
+}
+
+int main(){
+    int n, graph[20][20], start;
+
+    printf("Enter number of vertices: ");
+    scanf("%d",&n);
+
+    printf("Enter adjacency matrix:\n");
+    for(int i=0;i<n;i++)
+        for(int j=0;j<n;j++)
+            scanf("%d",&graph[i][j]);
+
+    printf("Enter starting vertex: ");
+    scanf("%d",&start);
+
+    dfs(graph,n,start);
+
+    return 0;
+}
